@@ -9,85 +9,46 @@
     <link href="https://fonts.googleapis.com/css2?family=Carter+One&family=cwTeXYen&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* 叢林配色盤 */
-            --jungle-dark: #1a4314; /* 深林綠 */
-            --jungle-light: #4e8d42; /* 樹葉綠 */
-            --wood-dark: #5d4037;   /* 深木頭 */
-            --wood-light: #8d6e63;  /* 淺木頭 */
-            --accent: #ffd54f;      /* 像寶藏一樣的金黃色 */
-            --success: #76ff03;     /* 螢光綠，答對的效果 */
-            --error: #ff3d00;       /* 鮮紅色，像毒蘑菇 */
-            --text-cream: #fff8e1;  /* 米白色文字 */
+            --jungle-dark: #1a4314;
+            --jungle-light: #4e8d42;
+            --wood-dark: #5d4037;
+            --wood-light: #8d6e63;
+            --accent: #ffd54f;
+            --success: #76ff03;
+            --error: #ff3d00;
+            --text-cream: #fff8e1;
         }
         
         body {
-            /* 使用 Carter One 加上圓體，比較可愛 */
             font-family: 'Carter One', 'cwTeXYen', cursive, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            /* 背景改成深綠色漸層，模擬森林深處 */
             background: linear-gradient(135deg, var(--jungle-dark) 0%, #2c5e2e 100%);
             color: var(--text-cream);
-        }
-
-        /* 為了增加叢林感，用偽元素在背景加一點紋路（選用） */
-        body::before {
-            content: '🌿 🌴 🐒 🦜 🌿 🌴';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.05;
-            font-size: 5rem;
-            z-index: -1;
             overflow: hidden;
-            pointer-events: none;
         }
 
         .container {
-            /* 把容器做成一塊大木板的樣子 */
             background: var(--wood-dark);
             padding: 2.5rem;
             border-radius: 20px;
-            /* 增加邊框和陰影，製造立體感 */
             border: 8px solid var(--wood-light);
-            box-shadow: 
-                inset 0 0 20px rgba(0,0,0,0.5),
-                0 20px 30px rgba(0,0,0,0.3);
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5), 0 20px 30px rgba(0,0,0,0.3);
             text-align: center;
             width: 90%;
             max-width: 450px;
             position: relative;
         }
 
-        /* 在木板上方加一些裝飾 */
-        .container::after {
-            content: '👑 叢林探險家 👑';
-            position: absolute;
-            top: -25px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--wood-light);
-            padding: 5px 20px;
-            border-radius: 15px;
-            border: 3px solid var(--wood-dark);
-            font-size: 1.2rem;
-            color: var(--accent);
-            text-shadow: 1px 1px rgba(0,0,0,0.5);
-        }
-
         .scoreboard {
             display: flex;
             justify-content: space-between;
-            margin-top: 1rem;
             margin-bottom: 2rem;
             font-size: 1.3rem;
             color: var(--accent);
-            text-shadow: 1px 1px #000;
         }
         
         .question-box {
@@ -98,10 +59,8 @@
         }
 
         .question {
-            font-size: 3.8rem;
+            font-size: 3.5rem;
             margin: 0;
-            /* 讓題目看起來像刻在木頭上，有點發光 */
-            color: var(--text-cream);
             text-shadow: 2px 2px 0px var(--jungle-dark);
         }
 
@@ -114,47 +73,70 @@
         button {
             padding: 1.2rem;
             font-size: 1.6rem;
-            /* 按鈕做成像是小木塊或是石板 */
             font-family: inherit;
             border: 4px solid var(--wood-dark);
             border-radius: 15px;
             background: var(--wood-light);
             color: var(--text-cream);
             cursor: pointer;
-            box-shadow: 0 6px 0 var(--wood-dark); /* 立體感按鈕底部 */
+            box-shadow: 0 6px 0 var(--wood-dark);
             transition: all 0.1s ease;
-            text-shadow: 1px 1px rgba(0,0,0,0.3);
         }
 
-        /* 按下去的效果 */
         button:active:not([disabled]) {
             transform: translateY(4px);
             box-shadow: 0 2px 0 var(--wood-dark);
         }
 
-        button:hover:not([disabled]) {
-            background: #9e7d70;
-        }
-
         button.correct {
             background: var(--success) !important;
-            border-color: #4caf50 !important;
-            box-shadow: 0 6px 0 #388e3c !important;
             color: var(--jungle-dark);
         }
 
         button.wrong {
             background: var(--error) !important;
-            border-color: #c62828 !important;
-            box-shadow: 0 6px 0 #b71c1c !important;
         }
 
-        .feedback {
+        /* 寶藏彈窗樣式 */
+        #victory-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 100;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .treasure-card {
+            background: var(--wood-light);
+            padding: 3rem;
+            border-radius: 30px;
+            border: 10px solid var(--accent);
+            max-width: 300px;
+        }
+
+        .treasure-name {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin: 1rem 0;
+            text-shadow: 2px 2px #000;
+        }
+
+        .btn-restart {
             margin-top: 2rem;
-            min-height: 1.8rem;
-            font-weight: bold;
-            font-size: 1.3rem;
-            text-shadow: 1px 1px rgba(0,0,0,0.5);
+            background: var(--success);
+            color: var(--jungle-dark);
+            padding: 10px 30px;
+            border-radius: 50px;
+            font-size: 1.5rem;
+            border: none;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -162,12 +144,12 @@
 
 <div class="container">
     <div class="scoreboard">
-        <span>💰 寶藏積分：<span id="score">0</span></span>
-        <span>🗺️ 關卡：<span id="q-count">1</span></span>
+        <span>積分：<span id="score">0</span></span>
+        <span>連續答對：<span id="combo">0</span>/10</span>
     </div>
     
     <div class="question-box">
-        <p id="question" class="question">1000 + 1000</p>
+        <p id="question" class="question">載入中...</p>
     </div>
 
     <div class="options-grid" id="options">
@@ -176,80 +158,109 @@
         <button onclick="checkAnswer(this)">-</button>
         <button onclick="checkAnswer(this)">-</button>
     </div>
+    <div id="message" style="margin-top: 20px; min-height: 24px;"></div>
+</div>
 
-    <div id="message" class="feedback"></div>
+<div id="victory-overlay">
+    <div class="treasure-card">
+        <div style="font-size: 1.2rem;">恭喜完成挑戰！獲得寶藏：</div>
+        <div id="treasure-result" class="treasure-name">神祕寶物</div>
+        <button class="btn-restart" onclick="restartGame()">繼續冒險</button>
+    </div>
 </div>
 
 <script>
     let score = 0;
-    let count = 1;
+    let combo = 0;
     let correctAnswer = 0;
+    
+    const treasures = [
+        "黃金瑪雅面具", "翡翠象神像", "古老航海羅盤", "鑲鑽的開山刀", "神祕的紫水晶",
+        "虎牙項鍊", "太陽神祭司手杖", "沉重的黃金錠", "彩虹鳥的羽毛", "遠古恐龍化石",
+        "叢林地圖殘卷", "閃耀的紅寶石", "刻有咒語的石版", "銀製的獵人哨笛", "傳說中的藍蝴蝶",
+        "鑲金的野豬獠牙", "祭祀用的黑曜石", "森林之心的種子", "消失的文明金幣", "冒險家的破舊筆記",
+        "聖甲蟲護身符", "月光石戒指", "翠玉做的笛子", "龍鱗片碎片", "裝滿靈藥的葫蘆",
+        "燃不盡的火把", "嵌有珍珠的貝殼", "閃閃發光的螢光石", "象徵榮譽的戰旗", "裝著星星的玻璃罐"
+    ];
 
     function generateQuestion() {
-        const isAddition = Math.random() > 0.5;
+        const mode = Math.random();
         let n1, n2;
 
-        if (isAddition) {
-            n1 = Math.floor(Math.random() * 4000) + 1000;
+        if (mode < 0.4) {
+            n1 = Math.floor(Math.random() * 800) + 100;
+            n2 = Math.floor(Math.random() * 800) + 100;
+            correctAnswer = n1 + n2;
+            document.getElementById('question').innerText = `${n1} + ${n2}`;
+        } else if (mode < 0.7) {
+            n1 = Math.floor(Math.random() * 800) + 200;
+            n2 = Math.floor(Math.random() * (n1 - 100)) + 50;
+            correctAnswer = n1 - n2;
+            document.getElementById('question').innerText = `${n1} - ${n2}`;
+        } else {
+            n1 = Math.floor(Math.random() * 900) + 100;
             n2 = Math.floor(Math.random() * 4000) + 1000;
             correctAnswer = n1 + n2;
             document.getElementById('question').innerText = `${n1} + ${n2}`;
-        } else {
-            n1 = Math.floor(Math.random() * 8000) + 2000;
-            n2 = Math.floor(Math.random() * (n1 - 1000)) + 1000;
-            correctAnswer = n1 - n2;
-            document.getElementById('question').innerText = `${n1} - ${n2}`;
         }
 
         const buttons = document.querySelectorAll('.options-grid button');
         let choices = [correctAnswer];
-        
         while (choices.length < 4) {
-            let offset = (Math.floor(Math.random() * 20) - 10) * (Math.random() > 0.5 ? 10 : 1);
+            let offset = (Math.floor(Math.random() * 10) + 1) * (Math.random() > 0.5 ? 10 : 1);
+            if (Math.random() > 0.5) offset *= -1;
             let wrong = correctAnswer + offset;
-            if (wrong !== correctAnswer && wrong > 0 && !choices.includes(wrong)) {
-                choices.push(wrong);
-            }
+            if (wrong !== correctAnswer && wrong > 0 && !choices.includes(wrong)) choices.push(wrong);
         }
-
         choices.sort(() => Math.random() - 0.5);
-
         buttons.forEach((btn, i) => {
             btn.innerText = choices[i];
             btn.className = '';
             btn.disabled = false;
         });
-        document.getElementById('message').innerText = '準備好挑戰下一題了嗎？';
-        document.getElementById('message').style.color = '#fff8e1';
+        document.getElementById('message').innerText = "";
     }
 
     function checkAnswer(btn) {
         const selected = parseInt(btn.innerText);
         const buttons = document.querySelectorAll('.options-grid button');
-        
         buttons.forEach(b => b.disabled = true);
 
         if (selected === correctAnswer) {
             btn.classList.add('correct');
             score += 100;
+            combo++;
             document.getElementById('score').innerText = score;
-            document.getElementById('message').innerText = '🎉 答對了！找到寶藏！';
-            document.getElementById('message').style.color = 'var(--success)';
+            document.getElementById('combo').innerText = combo;
+            
+            if (combo >= 10) {
+                setTimeout(showVictory, 1000);
+            } else {
+                setTimeout(generateQuestion, 1000);
+            }
         } else {
             btn.classList.add('wrong');
-            document.getElementById('message').innerText = `💥 哎呀！掉進陷阱了，答案是 ${correctAnswer}`;
-            document.getElementById('message').style.color = 'var(--error)';
+            combo = 0;
+            document.getElementById('combo').innerText = combo;
+            document.getElementById('message').innerText = `答錯了，正確答案是 ${correctAnswer}`;
+            setTimeout(generateQuestion, 2000);
         }
+    }
 
-        setTimeout(() => {
-            count++;
-            document.getElementById('q-count').innerText = count;
-            generateQuestion();
-        }, 2000);
+    function showVictory() {
+        const randomTreasure = treasures[Math.floor(Math.random() * treasures.length)];
+        document.getElementById('treasure-result').innerText = randomTreasure;
+        document.getElementById('victory-overlay').style.display = 'flex';
+    }
+
+    function restartGame() {
+        combo = 0;
+        document.getElementById('combo').innerText = combo;
+        document.getElementById('victory-overlay').style.display = 'none';
+        generateQuestion();
     }
 
     generateQuestion();
 </script>
-
 </body>
 </html>
