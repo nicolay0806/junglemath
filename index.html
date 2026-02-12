@@ -3,44 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>叢林數學：遺跡冒險</title>
+    <title>石器數學大冒險</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Carter+One&family=cwTeXYen&display=swap" rel="stylesheet">
     <style>
         :root {
-            --deep-forest: #081c0a;
-            --moss-green: #1b4d22;
-            --leaf-bright: #76b041;
-            --ancient-stone: #4a4a4a;
-            --artifact-gold: #FFD700;
-            --rare-purple: #a333c8;
-            --text-off-white: #f0ede5;
+            --stone-grey: #cfd8dc;
+            --stone-dark: #78909c;
+            --dino-orange: #ffab40; /* 劍齒虎橘 */
+            --jungle-green: #66bb6a;
+            --bone-white: #fff9c4;
+            --sky-blue: #4fc3f7;
+            --text-color: #37474f;
         }
 
         body {
             font-family: 'Carter One', 'cwTeXYen', cursive, sans-serif;
-            background: linear-gradient(180deg, var(--moss-green) 0%, var(--deep-forest) 100%);
+            background-color: #8d6e63;
+            /* 背景：模仿獸皮斑點或原始叢林 */
+            background-image: 
+                radial-gradient(circle at 10% 20%, #6d4c41 5%, transparent 6%),
+                radial-gradient(circle at 90% 80%, #5d4037 8%, transparent 9%),
+                linear-gradient(135deg, #a1887f 0%, #8d6e63 100%);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            color: var(--text-off-white);
             overflow: hidden;
         }
 
-        /* 遺跡石板容器：使用 clip-path 做出不規則邊緣 */
-        .game-board {
-            background: rgba(40, 40, 40, 0.95);
+        /* 主容器：一塊巨大的不規則石頭 */
+        .stone-slab {
+            background: var(--stone-grey);
+            /* 卡通石頭質感：噪點 */
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%2390a4ae' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E");
             padding: 2.5rem;
-            width: 85%;
-            max-width: 480px;
-            position: relative;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
-            clip-path: polygon(2% 0%, 98% 1%, 100% 4%, 99% 95%, 97% 100%, 3% 99%, 0% 96%, 1% 5%);
-            border: 4px solid var(--ancient-stone);
+            width: 90%;
+            max-width: 450px;
             text-align: center;
+            position: relative;
+            color: var(--text-color);
+            /* 關鍵：不規則的邊框半徑，看起來像石頭 */
+            border-radius: 2% 98% 1% 99% / 98% 2% 99% 1%; 
+            border: 8px solid var(--text-color);
+            box-shadow: 15px 15px 0px rgba(0,0,0,0.2); /* 硬陰影，卡通感 */
+        }
+        
+        /* 讓石頭邊角更自然一點 */
+        .stone-slab {
+            border-radius: 25px 225px 15px 255px / 225px 15px 255px 15px;
         }
 
         .header {
@@ -48,306 +61,383 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 2rem;
-            border-bottom: 2px solid rgba(255,215,0,0.2);
-            padding-bottom: 1rem;
         }
 
-        .stats-text {
-            text-align: left;
-            font-size: 1rem;
-            color: var(--artifact-gold);
-            letter-spacing: 1px;
+        .stats-box {
+            background: var(--bone-white);
+            padding: 10px 20px;
+            border: 4px solid var(--text-color);
+            border-radius: 50px 10px 50px 10px;
+            font-size: 1.1rem;
+            transform: rotate(-2deg);
         }
 
-        /* 藏寶袋按鈕：設計得更像皮革掛袋 */
-        .bag-trigger {
-            background: #5d4037;
-            border: 2px solid var(--artifact-gold);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 8px;
+        /* 背包按鈕：做成一個綁起來的皮袋子 */
+        .bag-btn {
+            background: var(--dino-orange);
+            color: var(--text-color);
+            border: 4px solid var(--text-color);
+            padding: 10px 15px;
+            border-radius: 40% 40% 20% 20%;
             cursor: pointer;
+            font-weight: bold;
             font-family: inherit;
-            box-shadow: 0 4px 0 #3e2723;
+            box-shadow: 4px 4px 0 var(--text-color);
+            transition: transform 0.1s;
         }
+        .bag-btn:active { transform: translateY(4px); box-shadow: 0 0 0; }
 
         .question-area {
-            background: #2a2a2a;
             margin: 2rem 0;
-            padding: 2rem;
+            padding: 1.5rem;
+            /* 刻在石板上的感覺 */
+            background: rgba(0,0,0,0.05);
             border-radius: 15px;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+            border: 4px dashed var(--text-color);
         }
 
-        .question-text {
-            font-size: 3.5rem;
+        .question {
+            font-size: 3.8rem;
             margin: 0;
-            text-shadow: 0 0 10px rgba(255,215,0,0.3);
+            color: var(--text-color);
         }
 
         .btn-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
+            gap: 20px;
         }
 
-        .ans-btn {
-            background: var(--ancient-stone);
-            border: none;
+        /* 答案按鈕：恐龍蛋或鵝卵石 */
+        .rock-btn {
+            background: white;
             padding: 1.5rem;
             font-size: 1.8rem;
-            color: white;
-            font-family: inherit;
-            border-radius: 10px;
+            border: 4px solid var(--text-color);
+            /* 不規則圓形 */
+            border-radius: 60% 40% 70% 30% / 50% 60% 30% 60%;
+            color: var(--text-color);
             cursor: pointer;
-            box-shadow: 0 6px 0 #222;
-            transition: transform 0.1s;
+            font-family: inherit;
+            box-shadow: 0 8px 0 #b0bec5; /* 厚實的石頭陰影 */
+            transition: all 0.1s;
         }
 
-        .ans-btn:active {
-            transform: translateY(4px);
-            box-shadow: 0 2px 0 #222;
+        .rock-btn:active {
+            transform: translateY(6px);
+            box-shadow: 0 2px 0 #b0bec5;
         }
 
-        .ans-btn.correct { background: #2e7d32 !important; box-shadow: 0 6px 0 #1b5e20; }
-        .ans-btn.wrong { background: #c62828 !important; box-shadow: 0 6px 0 #8e0000; }
-        .ans-btn.vanished { visibility: hidden; pointer-events: none; }
+        .rock-btn.correct { background: var(--jungle-green); border-color: #1b5e20; color: white; box-shadow: 0 8px 0 #1b5e20; }
+        .rock-btn.wrong { background: #ff5252; border-color: #b71c1c; color: white; box-shadow: 0 8px 0 #b71c1c; }
+        .rock-btn.hidden { visibility: hidden; }
 
-        /* 全螢幕遮罩視窗 */
-        .full-overlay {
+        /* 模態視窗：整張獸皮蓋下來 */
+        .modal-overlay {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95);
+            background: rgba(0,0,0,0.8);
             z-index: 999;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
         }
 
-        .treasure-box {
-            background: #3e2723;
-            border: 5px solid var(--artifact-gold);
-            padding: 3rem;
+        .modal-content {
+            background: var(--dino-orange);
+            /* 獸皮斑點 */
+            background-image: radial-gradient(var(--text-color) 15%, transparent 16%), radial-gradient(var(--text-color) 15%, transparent 16%);
+            background-size: 60px 60px;
+            background-position: 0 0, 30px 30px;
+            padding: 5px; /* 邊框 */
             border-radius: 20px;
-            width: 80%;
-            max-width: 350px;
-            text-align: center;
+            transform: rotate(2deg);
+            width: 90%;
+            max-width: 400px;
         }
 
-        .tier-ssr { color: var(--artifact-gold); text-shadow: 0 0 10px gold; }
-        .tier-sr { color: var(--rare-purple); text-shadow: 0 0 8px purple; }
-        .tier-s { color: white; }
+        .modal-inner {
+            background: var(--bone-white);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 5px solid var(--text-color);
+        }
 
-        .inventory-list {
-            width: 100%;
+        .item-list {
             max-height: 50vh;
             overflow-y: auto;
-            margin-top: 1rem;
+            text-align: left;
+            margin: 15px 0;
         }
 
-        .item-card {
-            background: rgba(255,255,255,0.05);
-            margin: 8px 0;
-            padding: 12px;
-            border-radius: 8px;
+        .item-row {
+            border-bottom: 2px dashed var(--text-color);
+            padding: 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .btn-use {
-            background: var(--leaf-bright);
-            border: none;
-            padding: 6px 12px;
-            border-radius: 5px;
+        .action-btn {
+            background: var(--sky-blue);
+            border: 3px solid var(--text-color);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 1.2rem;
             cursor: pointer;
+            box-shadow: 3px 3px 0 var(--text-color);
             font-family: inherit;
         }
+        .action-btn:active { transform: translate(3px, 3px); box-shadow: 0 0 0; }
+
+        /* 等級顏色 */
+        .rank-ssr { color: #f50057; font-weight: 900; }
+        .rank-sr { color: #6200ea; font-weight: bold; }
+        .rank-s { color: var(--text-color); }
+
     </style>
 </head>
 <body>
 
-<div class="game-board">
+<div class="stone-slab">
     <div class="header">
-        <div class="stats-text">
-            <div>探險積分：<span id="score">0</span></div>
-            <div>連勝進度：<span id="combo">0</span> / 10</div>
+        <div class="stats-box">
+            <div>🍖 積分：<span id="score">0</span></div>
+            <div>🔥 連勝：<span id="combo">0</span>/10</div>
         </div>
-        <button class="bag-trigger" onclick="openBag()">藏寶袋 (<span id="bag-count">0</span>)</button>
+        <button class="bag-btn" onclick="openBag()">🎒 藏寶袋 (<span id="bag-count">0</span>)</button>
     </div>
 
     <div class="question-area">
-        <div id="q-display" class="question-text">載入中...</div>
+        <p id="q-text" class="question">...</p>
     </div>
 
-    <div class="btn-grid" id="ans-grid">
-        <button class="ans-btn" onclick="handleChoice(this)">-</button>
-        <button class="ans-btn" onclick="handleChoice(this)">-</button>
-        <button class="ans-btn" onclick="handleChoice(this)">-</button>
-        <button class="ans-btn" onclick="handleChoice(this)">-</button>
-    </div>
-</div>
-
-<div id="win-modal" class="full-overlay">
-    <div class="treasure-box">
-        <h1 id="win-tier-title">等級</h1>
-        <h2 id="win-item-name" style="margin: 20px 0;">寶物名稱</h2>
-        <p id="win-item-ability" style="font-size: 0.9rem; opacity: 0.8;"></p>
-        <button class="ans-btn" style="width: 100%; margin-top: 20px;" onclick="confirmTreasure()">放入袋中</button>
+    <div class="btn-grid" id="options">
+        <button class="rock-btn" onclick="check(this)">?</button>
+        <button class="rock-btn" onclick="check(this)">?</button>
+        <button class="rock-btn" onclick="check(this)">?</button>
+        <button class="rock-btn" onclick="check(this)">?</button>
     </div>
 </div>
 
-<div id="bag-modal" class="full-overlay">
-    <div class="treasure-box" style="max-height: 80vh; overflow: hidden; display: flex; flex-direction: column;">
-        <h2 style="color: var(--artifact-gold);">我的收藏</h2>
-        <div id="bag-items" class="inventory-list"></div>
-        <button class="ans-btn" style="width: 100%; margin-top: 20px;" onclick="closeBag()">回到冒險</button>
+<div id="win-modal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-inner">
+            <h2 id="win-title" style="font-size: 2.5rem; margin:0;">哇嗚！</h2>
+            <p style="font-size: 1.2rem;">找到了傳說中的...</p>
+            <div id="win-item" style="font-size: 2rem; font-weight:bold; margin: 20px 0; color: var(--dino-orange); -webkit-text-stroke: 2px var(--text-color);">寶物</div>
+            <p id="win-desc" style="color: #666; font-size: 0.9rem;"></p>
+            <button class="action-btn" style="width: 100%; background: var(--jungle-green); color: white;" onclick="closeWinAndNext()">放入袋子，繼續冒險！</button>
+        </div>
+    </div>
+</div>
+
+<div id="bag-modal" class="modal-overlay">
+    <div class="modal-content" style="transform: rotate(-1deg);">
+        <div class="modal-inner">
+            <h2>🎒 我的收藏</h2>
+            <div id="bag-list" class="item-list"></div>
+            <button class="action-btn" style="width: 100%;" onclick="closeBag()">關閉</button>
+        </div>
     </div>
 </div>
 
 <script>
-    let currentScore = 0;
-    let currentCombo = 0;
-    let correctValue = 0;
-    let myInventory = JSON.parse(localStorage.getItem('JungleQuest_Inv_V3')) || [];
+    // 遊戲數據
+    let score = 0;
+    let combo = 0;
+    let ans = 0;
+    let bag = JSON.parse(localStorage.getItem('DinoMath_Bag_V1')) || [];
 
-    const treasureDatabase = {
-        SSR: ["黃金聖甲蟲", "太陽神之眼", "遠古祭祀權杖"],
-        SR: ["翡翠豹神像", "迷霧指南針", "紫晶部落首飾", "赤紅獵人長弓"],
-        S: ["粗糙的石斧", "探險家水壺", "磨損的皮靴", "防身用火把", "沉重的古幣", "亞麻束口袋"]
+    // 寶物資料庫
+    const DB = {
+        SSR: [
+            {n: "霸王龍牙齒", d: "霸氣外露！直接嚇跑所有錯誤答案 (自動過關)"},
+            {n: "外星人石板", d: "擁有高等智慧！自動選出正確答案"},
+            {n: "黃金三角龍", d: "無堅不摧！衝撞所有障礙 (自動過關)"}
+        ],
+        SR: [
+            {n: "劍齒虎毛皮", d: "溫暖的力量，移除 2 個錯誤選項"},
+            {n: "神祕發光石", d: "照亮真相，移除 2 個錯誤選項"},
+            {n: "始祖鳥羽毛", d: "輕盈飛翔，移除 2 個錯誤選項"},
+            {n: "巫師的骨棒", d: "施展法術，移除 2 個錯誤選項"}
+        ],
+        S: [
+            {n: "破損的石斧", d: "還算順手，移除 1 個錯誤選項"},
+            {n: "猛瑪象便便", d: "臭死人了！熏走 1 個錯誤選項"},
+            {n: "奇怪的果實", d: "吃了變聰明？移除 1 個錯誤選項"},
+            {n: "乾掉的蜥蜴", d: "不知道能幹嘛，移除 1 個錯誤選項"},
+            {n: "圓滾滾石頭", d: "單純的石頭，移除 1 個錯誤選項"}
+        ]
     };
 
-    function startNewTurn() {
-        const type = Math.random();
+    function init() {
+        updateUI();
+        nextQ();
+    }
+
+    // 出題邏輯
+    function nextQ() {
+        const mode = Math.random();
         let a, b;
-        if (type < 0.4) { 
-            a = Math.floor(Math.random()*800)+100; b = Math.floor(Math.random()*800)+100;
-            correctValue = a + b;
-            document.getElementById('q-display').innerText = `${a} + ${b}`;
-        } else if (type < 0.7) {
-            a = Math.floor(Math.random()*800)+200; b = Math.floor(Math.random()*(a-100))+50;
-            correctValue = a - b;
-            document.getElementById('q-display').innerText = `${a} - ${b}`;
+        
+        // 40% 百位加法, 30% 百位減法, 30% 百加千
+        if (mode < 0.4) {
+            a = rand(100, 800); b = rand(100, 800);
+            ans = a + b;
+            document.getElementById('q-text').innerText = `${a} + ${b}`;
+        } else if (mode < 0.7) {
+            a = rand(200, 900); b = rand(50, a - 100);
+            ans = a - b;
+            document.getElementById('q-text').innerText = `${a} - ${b}`;
         } else {
-            a = Math.floor(Math.random()*900)+100; b = Math.floor(Math.random()*4000)+1000;
-            correctValue = a + b;
-            document.getElementById('q-display').innerText = `${a} + ${b}`;
+            a = rand(100, 900); b = rand(1000, 4000);
+            ans = a + b;
+            document.getElementById('q-text').innerText = `${a} + ${b}`;
         }
 
-        const btns = document.querySelectorAll('.ans-btn');
-        let options = [correctValue];
-        while(options.length < 4) {
-            let offset = (Math.floor(Math.random()*15)+1) * (Math.random()>0.5?10:1);
-            if(Math.random()>0.5) offset *= -1;
-            let val = correctValue + offset;
-            if(val > 0 && val !== correctValue && !options.includes(val)) options.push(val);
+        // 產生選項
+        let opts = [ans];
+        while (opts.length < 4) {
+            let fake = ans + (rand(1, 15) * (Math.random() > 0.5 ? 10 : 1));
+            if (fake > 0 && fake !== ans && !opts.includes(fake)) opts.push(fake);
         }
-        options.sort(() => Math.random() - 0.5);
-        
-        btns.forEach((btn, idx) => {
-            if(btn.classList.contains('ans-btn')) {
-                btn.innerText = options[idx];
-                btn.className = 'ans-btn';
-                btn.disabled = false;
-            }
+        opts.sort(() => Math.random() - 0.5);
+
+        // 渲染按鈕
+        const btns = document.querySelectorAll('.rock-btn');
+        btns.forEach((btn, i) => {
+            btn.innerText = opts[i];
+            btn.className = 'rock-btn'; // 重置樣式
+            btn.disabled = false;
         });
     }
 
-    function handleChoice(element) {
-        const userChoice = parseInt(element.innerText);
-        const allBtns = document.querySelectorAll('.ans-btn');
-        allBtns.forEach(b => b.disabled = true);
+    function check(btn) {
+        const val = parseInt(btn.innerText);
+        const all = document.querySelectorAll('.rock-btn');
+        all.forEach(b => b.disabled = true); // 鎖定
 
-        if (userChoice === correctValue) {
-            element.classList.add('correct');
-            currentScore += 100;
-            currentCombo++;
-            document.getElementById('score').innerText = currentScore;
-            document.getElementById('combo').innerText = currentCombo;
-
-            if (currentCombo >= 10) {
-                setTimeout(triggerWin, 600);
+        if (val === ans) {
+            btn.classList.add('correct');
+            score += 100;
+            combo++;
+            
+            if (combo >= 10) {
+                setTimeout(openWin, 800); // 觸發寶物
             } else {
-                setTimeout(startNewTurn, 600);
+                setTimeout(() => {
+                    updateUI();
+                    nextQ();
+                }, 800);
             }
         } else {
-            element.classList.add('wrong');
-            currentCombo = 0;
-            document.getElementById('combo').innerText = currentCombo;
-            setTimeout(startNewTurn, 1500);
+            btn.classList.add('wrong');
+            combo = 0;
+            updateUI();
+            setTimeout(() => {
+                nextQ();
+            }, 1500);
         }
+        updateUI();
     }
 
-    function triggerWin() {
-        let rand = Math.random(), tier = "S";
-        if (rand < 0.05) tier = "SSR";
-        else if (rand < 0.25) tier = "SR";
+    // 寶物系統邏輯
+    function openWin() {
+        // 抽獎
+        let r = Math.random();
+        let tier = "S";
+        if (r < 0.05) tier = "SSR";
+        else if (r < 0.25) tier = "SR";
 
-        const pool = treasureDatabase[tier];
-        const name = pool[Math.floor(Math.random() * pool.length)];
-        
-        const titleEl = document.getElementById('win-tier-title');
-        titleEl.innerText = tier + " 等級";
-        titleEl.className = "tier-" + tier.toLowerCase();
-        document.getElementById('win-item-name').innerText = name;
-        document.getElementById('win-item-ability').innerText = 
-            tier === "SSR" ? "遠古神力：自動摧毀所有錯誤答案" : 
-            (tier === "SR" ? "精靈指引：移除 2 個錯誤答案" : "直覺閃現：移除 1 個錯誤答案");
+        const pool = DB[tier];
+        const item = pool[Math.floor(Math.random() * pool.length)];
 
-        myInventory.push({ name, tier });
-        localStorage.setItem('JungleQuest_Inv_V3', JSON.stringify(myInventory));
+        // 顯示介面
+        document.getElementById('win-title').innerText = tier + " 級寶物！";
+        document.getElementById('win-title').className = tier === "SSR" ? "rank-ssr" : (tier === "SR" ? "rank-sr" : "rank-s");
+        document.getElementById('win-item').innerText = item.n;
+        document.getElementById('win-desc').innerText = item.d;
+
+        // 存入背包
+        bag.push({ ...item, tier });
+        localStorage.setItem('DinoMath_Bag_V1', JSON.stringify(bag));
+        updateUI();
+
         document.getElementById('win-modal').style.display = 'flex';
-        updateBagStats();
     }
 
-    function confirmTreasure() {
+    // 關鍵修復：這裡確保按鈕按下後，必定關閉視窗並重新出題
+    function closeWinAndNext() {
         document.getElementById('win-modal').style.display = 'none';
-        currentCombo = 0;
-        document.getElementById('combo').innerText = 0;
-        startNewTurn();
+        combo = 0; // 重置連勝
+        updateUI();
+        nextQ(); // 產生下一題
     }
 
-    function useItem(idx) {
-        const item = myInventory[idx];
-        const btns = Array.from(document.querySelectorAll('.ans-btn')).filter(b => !b.onclick.toString().includes('closeBag'));
-        const wrongs = btns.filter(b => parseInt(b.innerText) !== correctValue);
-
-        if (item.tier === "SSR") {
-            wrongs.forEach(b => { b.classList.add('vanished'); b.disabled = true; });
-        } else {
-            let count = item.tier === "SR" ? 2 : 1;
-            wrongs.sort(() => Math.random() - 0.5).slice(0, count).forEach(b => {
-                b.classList.add('vanished'); b.disabled = true;
-            });
-        }
-
-        myInventory.splice(idx, 1);
-        localStorage.setItem('JungleQuest_Inv_V3', JSON.stringify(myInventory));
-        closeBag();
-        updateBagStats();
-    }
-
+    // 背包與道具邏輯
     function openBag() {
-        const list = document.getElementById('bag-items');
-        list.innerHTML = myInventory.length === 0 ? "<p>背包目前是空的</p>" : "";
-        myInventory.forEach((item, i) => {
-            const card = document.createElement('div');
-            card.className = 'item-card';
-            card.innerHTML = `
-                <span class="tier-${item.tier.toLowerCase()}">${item.tier}: ${item.name}</span>
-                <button class="btn-use" onclick="useItem(${i})">施放</button>
+        const list = document.getElementById('bag-list');
+        list.innerHTML = bag.length ? "" : "背包裡只有空氣...";
+        
+        bag.forEach((item, idx) => {
+            const div = document.createElement('div');
+            div.className = 'item-row';
+            div.innerHTML = `
+                <div>
+                    <span class="${item.tier === 'SSR' ? 'rank-ssr' : (item.tier === 'SR' ? 'rank-sr' : '')}">[${item.tier}]</span>
+                    <b>${item.n}</b>
+                </div>
+                <button class="action-btn" style="font-size:0.8rem; padding:5px 10px;" onclick="useItem(${idx})">用掉</button>
             `;
-            list.appendChild(card);
+            list.appendChild(div);
         });
         document.getElementById('bag-modal').style.display = 'flex';
     }
 
-    function closeBag() { document.getElementById('bag-modal').style.display = 'none'; }
-    function updateBagStats() { document.getElementById('bag-count').innerText = myInventory.length; }
+    function useItem(idx) {
+        const item = bag[idx];
+        const btns = Array.from(document.querySelectorAll('.rock-btn'));
+        const wrongs = btns.filter(b => parseInt(b.innerText) !== ans);
 
-    updateBagStats();
-    startNewTurn();
+        // 道具效果
+        if (item.tier === "SSR") {
+            // 直接幫忙點擊正確答案
+            closeBag();
+            btns.find(b => parseInt(b.innerText) === ans).click();
+        } else {
+            // 刪除選項
+            let count = item.tier === "SR" ? 2 : 1;
+            wrongs.sort(() => Math.random() - 0.5).slice(0, count).forEach(b => {
+                b.classList.add('hidden');
+                b.disabled = true;
+            });
+            closeBag();
+        }
+
+        // 消耗道具
+        bag.splice(idx, 1);
+        localStorage.setItem('DinoMath_Bag_V1', JSON.stringify(bag));
+        updateUI();
+    }
+
+    function closeBag() {
+        document.getElementById('bag-modal').style.display = 'none';
+    }
+
+    function updateUI() {
+        document.getElementById('score').innerText = score;
+        document.getElementById('combo').innerText = combo;
+        document.getElementById('bag-count').innerText = bag.length;
+    }
+
+    function rand(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    init();
 </script>
+
 </body>
 </html>
